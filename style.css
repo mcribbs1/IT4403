@@ -1,0 +1,63 @@
+/* Main page */
+body {
+    background-color: #1f4d3a;
+    color: #f5f5f5;
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+/* Links */
+a {
+    color: #d3d3d3;
+}
+
+/* Name */
+h1 {
+    font-size: 42px;
+    margin-top: 50px;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #d3d3d3;
+    padding: 0 25px 10px 25px;
+    display: inline-block;
+}
+
+/* School name */
+h1 + h2 {
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+/* Navigation */
+nav {
+    margin: 20px auto;
+    padding: 10px;
+    width: 75%;
+}
+
+/* Navigation buttons */
+nav a {
+    display: inline-block;
+    color: #f5f5f5;
+    border: 2px solid #d3d3d3;
+    padding: 12px 25px;
+    margin: 5px 12px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Bottom section */
+footer {
+    border-top: 1px solid #d3d3d3;
+    width: 75%;
+    margin: 50px auto 30px auto;
+    padding-top: 20px;
+}
+
+footer p {
+    margin: 15px;
+}
+
+/* Disclaimer */
+footer p:last-child {
+    font-size: 14px;
+}
