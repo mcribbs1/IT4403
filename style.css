@@ -22,7 +22,7 @@ h1 {
 }
 
 /* School name */
-h1 + h2 {
+h1+h2 {
     font-size: 20px;
     margin-bottom: 15px;
 }
@@ -60,4 +60,10 @@ footer p {
 /* Disclaimer */
 footer p:last-child {
     font-size: 14px;
+}
+
+/* Lab List Formatting - Centers Lab Exercise Links */
+ul {
+    list-style: none;
+    padding-left: 0;
 }
