@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery Table Selection and Event Handling</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+
+<body>
+
+    <h1>jQuery Table Selection and Event Handling</h1>
+
+    <p>Use the buttons to hide or restore the odd rows. Click a table row to hide only that row.</p>
+
+    <button id="hideOdd">Hide Odd Rows</button>
+    <button id="showOdd">Restore Odd Rows</button>
+
+    <br><br>
+
+    <table border="1" cellpadding="10">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Course</th>
+                <th>Grade</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td>Alex</td>
+                <td>Web Development</td>
+                <td>92</td>
+            </tr>
+            <tr>
+                <td>Jordan</td>
+                <td>Networking</td>
+                <td>85</td>
+            </tr>
+            <tr>
+                <td>Taylor</td>
+                <td>Cybersecurity</td>
+                <td>88</td>
+            </tr>
+            <tr>
+                <td>Casey</td>
+                <td>Database Systems</td>
+                <td>95</td>
+            </tr>
+            <tr>
+                <td>Morgan</td>
+                <td>Linux Administration</td>
+                <td>90</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        $(document).ready(function() {
+
+            $("tbody tr:odd").css({
+                "background-color": "lightgray",
+                "font-style": "italic"
+            });
+
+            $("#hideOdd").click(function() {
+                $("tbody tr:odd").hide();
+            });
+
+            $("#showOdd").click(function() {
+                $("tbody tr:odd").show();
+            });
+
+            $("tbody tr").click(function() {
+                $(this).hide();
+            });
+
+        });
+    </script>
+
+</body>
+
+</html>

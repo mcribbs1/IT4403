@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery HTML DOM</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+
+<body>
+
+    <h1>HTML DOM</h1>
+    <p>This example shows how to access parts of HTML using jQuery.</p>
+
+    <hr>
+
+    <a id="w3clink" href="https://www.w3.org/">
+        <img id="w3cimg"
+             src="https://www.w3.org/2008/site/images/logo-w3c-screen-lg"
+             alt="W3C Logo">
+        W3C
+    </a>
+
+    <h3>Various methods to access parts of the objects above</h3>
+
+    <div id="output"></div>
+
+    <script>
+        $(document).ready(function() {
+
+            let linkText = $("#w3clink").text();
+            let linkHTML = $("#w3clink").html();
+            let linkHref = $("#w3clink").attr("href");
+            let imageSrc = $("#w3cimg").attr("src");
+
+            $("#output").append("<p><b>The link's text:</b> " + linkText + "</p>");
+            $("#output").append("<p><b>The link's innerHTML:</b> " + linkHTML + "</p>");
+            $("#output").append("<p><b>The link's href:</b> " + linkHref + "</p>");
+            $("#output").append("<p><b>The image's src:</b> " + imageSrc + "</p>");
+
+        });
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery Visual Effects</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+
+<body>
+
+    <h1>jQuery Visual Effects</h1>
+
+    <button id="hideButton">Hide</button>
+    <button id="showButton">Show</button>
+    <button id="toggleButton">Toggle</button>
+    <button id="fadeButton">Fade</button>
+    <button id="slideButton">Slide</button>
+
+    <br><br>
+
+    <div id="result" style="border: solid; padding: 20px; width: 400px;">
+        <h2>jQuery Effects</h2>
+        <p>
+            This box demonstrates different visual effects using jQuery.
+            Use the buttons above to hide, show, toggle, fade, or slide the content.
+        </p>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+
+            $("#hideButton").click(function() {
+                $("#result").hide();
+            });
+
+            $("#showButton").click(function() {
+                $("#result").show();
+            });
+
+            $("#toggleButton").click(function() {
+                $("#result").toggle();
+            });
+
+            $("#fadeButton").click(function() {
+                $("#result").hide().fadeIn();
+            });
+
+            $("#slideButton").click(function() {
+                $("#result").hide().slideDown();
+            });
+
+        });
+    </script>
+
+</body>
+
+</html>

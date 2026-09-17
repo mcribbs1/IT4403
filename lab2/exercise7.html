@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery Picture Browser</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+
+<body>
+
+    <h1>jQuery Picture Browser</h1>
+
+    <div>
+        <img id="picture" src="" alt="Picture Browser" width="500">
+        <p id="counter"></p>
+    </div>
+
+    <button id="nextButton">Next Picture</button>
+
+    <script>
+        $(document).ready(function () {
+
+            var pictures = [
+                "../images/Sunset1.jpeg",
+                "../images/Sunset2.jpeg",
+                "../images/Sunset3.jpeg",
+                "../images/Sunset4.jpeg"
+            ];
+
+            var currentPicture = 0;
+
+            function showPicture() {
+                $("#picture").attr("src", pictures[currentPicture]);
+                $("#counter").text(
+                    "Picture " + (currentPicture + 1) + " of " + pictures.length
+                );
+            }
+
+            $("#nextButton").click(function () {
+
+                currentPicture++;
+
+                if (currentPicture >= pictures.length) {
+                    currentPicture = 0;
+                }
+
+                $("#picture").fadeOut(function () {
+                    showPicture();
+                    $("#picture").fadeIn();
+                });
+
+            });
+
+            showPicture();
+
+        });
+    </script>
+
+</body>
+
+</html>

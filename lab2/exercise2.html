@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery Ready and Event Handling</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+
+<body>
+
+    <h1>jQuery ready() and Event Handling</h1>
+
+    <p id="paragraph1">This is the first paragraph.</p>
+    <p id="paragraph2">This is the second paragraph.</p>
+
+    <button id="button1">Hide Paragraph 1</button>
+    <button id="button2">Hide Paragraph 2</button>
+
+    <script>
+        $(document).ready(function() {
+
+            $("#button1").click(function() {
+                $("#paragraph1").hide();
+            });
+
+            $("#button2").click(function() {
+                $("#paragraph2").hide();
+            });
+
+        });
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery Calculation</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+
+<body>
+
+    <h1>Calculations</h1>
+    <p>This example shows some basic arithmetic using jQuery.</p>
+
+    <p id="addition"></p>
+    <p id="subtraction"></p>
+    <p id="multiplication"></p>
+    <p id="division"></p>
+
+    <script>
+    $(document).ready(function() {
+
+        let x = 10;
+        let y = 4.5;
+
+        $("#addition").text("x + y = " + (x + y));
+        $("#subtraction").text("x - y = " + (x - y));
+        $("#multiplication").text("x * y = " + (x * y));
+        $("#division").text("x / y = " + (x / y));
+    });
+</script>
+
+</body>
+
+</html>

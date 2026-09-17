@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery Selectors, DOM, and CSS</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+
+<body>
+
+    <h1>jQuery Selectors, DOM, and CSS</h1>
+
+    <h2 id="mainHeading">jQuery Practice</h2>
+
+    <p id="paragraph1">This paragraph has an ID.</p>
+    <p class="example">This paragraph uses the example class.</p>
+    <p class="example">This is another paragraph using the example class.</p>
+
+    <ul>
+        <li>jQuery Selectors</li>
+        <li>DOM Manipulation</li>
+        <li>CSS Manipulation</li>
+    </ul>
+
+    <p>
+        <a id="courseLink" href="https://jquery.com/">Visit jQuery</a>
+    </p>
+
+    <button id="idButton">Select by ID</button>
+    <button id="classButton">Select by Class</button>
+    <button id="elementButton">Select by Element</button>
+
+    <br><br>
+
+    <button id="readText">Read Text</button>
+    <button id="readHTML">Read HTML</button>
+    <button id="changeContent">Change Content</button>
+    <button id="readAttribute">Read Attribute</button>
+    <button id="changeAttribute">Change Attribute</button>
+
+    <br><br>
+
+    <button id="hideButton">Hide Paragraph</button>
+    <button id="showButton">Show Paragraph</button>
+    <button id="toggleButton">Toggle Paragraph</button>
+
+    <br><br>
+
+    <button id="cssButton">Change CSS</button>
+
+    <p id="output"></p>
+
+    <script>
+        $(document).ready(function() {
+
+            $("#idButton").click(function() {
+                $("#paragraph1").css("background-color", "lightgray");
+            });
+
+            $("#classButton").click(function() {
+                $(".example").css("border", "2px solid black");
+            });
+
+            $("#elementButton").click(function() {
+                $("li").css("font-size", "20px");
+            });
+
+            $("#readText").click(function() {
+                let text = $("#mainHeading").text();
+                $("#output").text("Heading text: " + text);
+            });
+
+            $("#readHTML").click(function() {
+                let html = $("ul").html();
+                $("#output").text("List HTML: " + html);
+            });
+
+            $("#changeContent").click(function() {
+                $("#paragraph1").text("The paragraph content has been changed with jQuery.");
+            });
+
+            $("#readAttribute").click(function() {
+                let link = $("#courseLink").attr("href");
+                $("#output").text("Current link: " + link);
+            });
+
+            $("#changeAttribute").click(function() {
+                $("#courseLink").attr("href", "https://www.w3.org/");
+                $("#courseLink").text("Visit W3C");
+            });
+
+            $("#hideButton").click(function() {
+                $("#paragraph1").hide();
+            });
+
+            $("#showButton").click(function() {
+                $("#paragraph1").show();
+            });
+
+            $("#toggleButton").click(function() {
+                $("#paragraph1").toggle();
+            });
+
+            $("#cssButton").click(function() {
+                $("#mainHeading").css({
+                    "background-color": "lightgray",
+                    "color": "darkgreen",
+                    "font-size": "32px",
+                    "border": "3px solid black",
+                    "width": "400px"
+                });
+            });
+
+        });
+    </script>
+
+</body>
+
+</html>

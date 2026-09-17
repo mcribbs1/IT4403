@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery Function</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+
+<body>
+
+    <h1>Function</h1>
+    <p>This example shows functions using jQuery.</p>
+
+    <div id="list1"></div>
+    <div id="list2"></div>
+
+    <script>
+        $(document).ready(function() {
+
+            function createList() {
+                let level = 5;
+                let list = "<ul>";
+
+                for (let i = 1; i <= level; i++) {
+                    list += "<li>" + i + "</li>";
+                }
+
+                list += "</ul>";
+                $("#list1").html(list);
+            }
+
+            function createList2(level, type) {
+                let list = "<" + type + ">";
+
+                for (let i = 1; i <= level; i++) {
+                    list += "<li>" + i + "</li>";
+                }
+
+                list += "</" + type + ">";
+                $("#list2").html(list);
+            }
+
+            createList();
+            createList2(10, "ol");
+
+        });
+    </script>
+
+</body>
+
+</html>

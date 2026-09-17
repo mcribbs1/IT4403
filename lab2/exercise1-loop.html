@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery Loop</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+
+<body>
+
+    <h1>Iteration Control Flow</h1>
+    <h2>for loop</h2>
+
+    <ul id="loop-list"></ul>
+
+    <script>
+        $(document).ready(function() {
+
+            let level = 5;
+
+            for (let i = 0; i < level; i++) {
+                $("#loop-list").append("<li>List item " + i + "</li>");
+            }
+
+        });
+    </script>
+
+</body>
+
+</html>
