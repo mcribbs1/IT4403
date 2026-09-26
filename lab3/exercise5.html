@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lab 3 - Exercise 5</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 900px;
+            margin: 40px auto;
+        }
+
+        .weather-box {
+            background-color: #f4f4f4;
+            padding: 20px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Lab 3: JSON - Exercise 5</h1>
+    <hr>
+
+    <h2>Weather Information</h2>
+
+    <div id="weatherInfo" class="weather-box"></div>
+
+    <script>
+        fetch("weather.json")
+            .then(response => response.json())
+            .then(weatherData => {
+
+                document.getElementById("weatherInfo").innerHTML =
+                    "<h2>" + weatherData.name + "</h2>" +
+                    "<p><strong>Weather:</strong> " + weatherData.weather[0].main + "</p>" +
+                    "<p><strong>Description:</strong> " + weatherData.weather[0].description + "</p>" +
+                    "<p><strong>Temperature:</strong> " + weatherData.main.temp + "</p>" +
+                    "<p><strong>Humidity:</strong> " + weatherData.main.humidity + "%</p>" +
+                    "<p><strong>Wind Speed:</strong> " + weatherData.wind.speed + "</p>" +
+                    "<p><strong>Cloudiness:</strong> " + weatherData.clouds.all + "%</p>";
+
+            });
+    </script>
+
+</body>
+</html>

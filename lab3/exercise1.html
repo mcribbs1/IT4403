@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab 3 - Exercise 1</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+            line-height: 1.6;
+        }
+
+        h1 {
+            border-bottom: 2px solid #333;
+            padding-bottom: 10px;
+        }
+
+        .example {
+            background-color: #f4f4f4;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+
+        code {
+            font-family: Consolas, monospace;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Lab 3: JSON - Exercise 1</h1>
+
+    <h2>Open Library JSON Structure</h2>
+
+    <p>
+        The Open Library JSON file contains information about a book.
+        The data is organized as a JSON object with name/value pairs,
+        arrays, and nested structures.
+    </p>
+
+    <div class="example">
+        <h3>Name/Value Pair</h3>
+        <code>"title": "A Game of Thrones"</code>
+        <p>
+            The property name is "title" and its value is the name of the book.
+        </p>
+    </div>
+
+    <div class="example">
+        <h3>Object</h3>
+        <code>
+            { "type": "/type/edition" }
+        </code>
+        <p>
+            Curly braces represent an object containing related information.
+        </p>
+    </div>
+
+    <div class="example">
+        <h3>Array</h3>
+        <code>
+            "publishers": ["Bantam Books"]
+        </code>
+        <p>
+            Square brackets represent an array, which can contain one or more values.
+        </p>
+    </div>
+
+    <div class="example">
+        <h3>Nested Structure</h3>
+        <code>
+            "authors": [{ "key": "/authors/OL19981A" }]
+        </code>
+        <p>
+            This is a nested structure because the authors array contains an object.
+        </p>
+    </div>
+
+    <h2>Overall Organization</h2>
+
+    <p>
+        The book information is organized in a hierarchical structure.
+        Simple values describe individual properties of the book, while
+        arrays and nested objects are used to organize more complex information.
+    </p>
+
+</body>
+</html>

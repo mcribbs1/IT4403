@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab 3 - Exercise 4</title>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+            line-height: 1.6;
+        }
+
+        h1 {
+            border-bottom: 2px solid #333;
+            padding-bottom: 10px;
+        }
+
+        .student-info, .course {
+            background-color: #f4f4f4;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+
+        .course h3 {
+            margin-top: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Lab 3: JSON - Exercise 4</h1>
+
+    <div id="studentInfo"></div>
+
+    <h2>Courses</h2>
+    <div id="courseList"></div>
+
+    <script>
+        $(document).ready(function () {
+
+            const studentData = {
+                "name": "Madelyn Cribbs",
+                "major": "IT Major",
+                "email": "mcribbs1@students.kennesaw.edu",
+                "courses": [
+                    {
+                        "code": "IT 4403",
+                        "title": "Advanced Web & Mobile Applications",
+                        "credits": 3
+                    },
+                    {
+                        "code": "IT 4423",
+                        "title": "Linux/Unix Administration",
+                        "credits": 3
+                    },
+                    {
+                        "code": "IT 4883",
+                        "title": "Infrastructure Defense",
+                        "credits": 3
+                    }
+                ]
+            };
+
+            $("#studentInfo").html(
+                '<div class="student-info">' +
+                '<p><strong>Name:</strong> ' + studentData.name + '</p>' +
+                '<p><strong>Major:</strong> ' + studentData.major + '</p>' +
+                '<p><strong>Email:</strong> ' + studentData.email + '</p>' +
+                '</div>'
+            );
+
+            $.each(studentData.courses, function (index, course) {
+                $("#courseList").append(
+                    '<div class="course">' +
+                    '<h3>' + course.code + '</h3>' +
+                    '<p><strong>Course Title:</strong> ' + course.title + '</p>' +
+                    '<p><strong>Credit Hours:</strong> ' + course.credits + '</p>' +
+                    '</div>'
+                );
+            });
+
+        });
+    </script>
+
+</body>
+</html>

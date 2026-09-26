@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lab 3 - Exercise 6</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 900px;
+            margin: 40px auto;
+        }
+
+        .movie-box {
+            background-color: #f4f4f4;
+            padding: 20px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Lab 3: JSON - Exercise 6</h1>
+    <hr>
+
+    <h2>Movie Information</h2>
+
+    <div id="movieInfo" class="movie-box"></div>
+
+    <script>
+        fetch("movie.json")
+            .then(response => response.json())
+            .then(movieData => {
+
+                document.getElementById("movieInfo").innerHTML =
+                    "<h2>" + movieData.title + "</h2>" +
+                    "<p><strong>Year:</strong> " + movieData.year + "</p>" +
+                    "<p><strong>Rating:</strong> " + movieData.mpaa_rating + "</p>" +
+                    "<p><strong>Runtime:</strong> " + movieData.runtime + " minutes</p>" +
+                    "<p><strong>Studio:</strong> " + movieData.studio + "</p>" +
+                    "<p><strong>Critics Score:</strong> " + movieData.ratings.critics_score + "%</p>" +
+                    "<p><strong>Audience Score:</strong> " + movieData.ratings.audience_score + "%</p>" +
+                    "<p><strong>Director:</strong> " + movieData.abridged_directors[0].name + "</p>";
+
+            });
+    </script>
+
+</body>
+</html>
