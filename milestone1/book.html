@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Milestone 1 - Book Information</title>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+            line-height: 1.6;
+        }
+
+        h1 {
+            border-bottom: 2px solid #333;
+            padding-bottom: 10px;
+        }
+
+        .book {
+            background-color: #f4f4f4;
+            padding: 25px;
+            margin-top: 20px;
+            border-radius: 5px;
+        }
+
+        .book img {
+            max-width: 200px;
+            margin-bottom: 15px;
+        }
+
+        .book h2 {
+            margin-top: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Milestone 1: Open Library Book</h1>
+
+    <div id="bookInfo"></div>
+
+    <script>
+        $(document).ready(function () {
+
+            $.getJSON("openlibrary-book.json", function (book) {
+
+                let publisher = book.publishers ? book.publishers.join(", ") : "Not available";
+                let isbn10 = book.isbn_10 ? book.isbn_10.join(", ") : "Not available";
+                let isbn13 = book.isbn_13 ? book.isbn_13.join(", ") : "Not available";
+                let author = book.authors ? book.authors[0].key : "Not available";
+                let firstSentence = book.first_sentence ? book.first_sentence.value : "Not available";
+
+                let cover = "";
+
+                if (book.covers && book.covers.length > 0) {
+                    cover =
+                        '<img src="https://covers.openlibrary.org/b/id/' +
+                        book.covers[0] +
+                        '-L.jpg" alt="Cover of ' +
+                        book.title +
+                        '">';
+                }
+
+                let openLibraryLink = "https://openlibrary.org" + book.key;
+
+                $("#bookInfo").html(
+                    '<div class="book">' +
+                        cover +
+                        '<h2>' + (book.title || "Title not available") + '</h2>' +
+                        '<p><strong>Publisher:</strong> ' + publisher + '</p>' +
+                        '<p><strong>Publication Date:</strong> ' + (book.publish_date || "Not available") + '</p>' +
+                        '<p><strong>Page Count:</strong> ' + (book.number_of_pages || "Not available") + '</p>' +
+                        '<p><strong>ISBN-10:</strong> ' + isbn10 + '</p>' +
+                        '<p><strong>ISBN-13:</strong> ' + isbn13 + '</p>' +
+                        '<p><strong>Author Reference:</strong> ' + author + '</p>' +
+                        '<p><strong>First Sentence:</strong> ' + firstSentence + '</p>' +
+                        '<p><a href="' + openLibraryLink + '" target="_blank">View this book on Open Library</a></p>' +
+                    '</div>'
+                );
+
+            });
+
+        });
+    </script>
+
+</body>
+
+</html>
