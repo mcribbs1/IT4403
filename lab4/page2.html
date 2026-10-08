@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab 4 - Album Photos</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <h1>Lab 4: Album Details</h1>
+
+    <a href="page1.html">Back to User Albums</a>
+
+    <h2>Album Information</h2>
+    <div id="albumInfo"></div>
+
+    <h2>Album Photos</h2>
+    <div id="photoList"></div>
+
+    <script>
+        // Get the album ID from the URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const albumId = urlParams.get("albumId");
+
+        // Retrieve information about the selected album
+        fetch(`https://jsonplaceholder.typicode.com/albums/${albumId}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Album not found");
+                }
+                return response.json();
+            })
+            .then(album => {
+                document.getElementById("albumInfo").innerHTML = `
+                <p><strong>Album Title:</strong> ${album.title}</p>
+                <p><strong>Album ID:</strong> ${album.id}</p>
+                <p><strong>User ID:</strong> ${album.userId}</p>
+            `;
+            })
+            .catch(error => {
+                document.getElementById("albumInfo").textContent =
+                    "Error loading album information.";
+                console.error(error);
+            });
+
+        // Retrieve photos for the selected album
+        fetch(`https://jsonplaceholder.typicode.com/photos?albumId=${albumId}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Failed to load photos");
+                }
+                return response.json();
+            })
+            .then(photos => {
+                let photoHTML = "";
+
+
+
+
+
+                photos.forEach((photo, index) => {
+                    photoHTML += `
+        <div>
+            <h3>Photo ${index + 1}</h3>
+            <img src="${photo.thumbnailUrl}"
+                 alt="${photo.title}"
+                 width="150">
+            <details>
+                <summary>View Original Title</summary>
+                <p>${photo.title}</p>
+            </details>
+        </div>
+    `;
+                });
+
+
+                document.getElementById("photoList").innerHTML = photoHTML;
+            })
+            .catch(error => {
+                document.getElementById("photoList").textContent =
+                    "Error loading album photos.";
+                console.error(error);
+            });
+    </script>
+
+</body>
+
+</html>
