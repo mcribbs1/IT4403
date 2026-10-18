@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Details - Open Library</title>
+
+    <!-- Reuse the Milestone 2 stylesheet for consistent design. -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation matches the search and bookshelf pages. -->
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="bookshelf.html">My Bookshelf</a>
+    </nav>
+
+    <main>
+        <h1>Book Details</h1>
+
+        <!-- JavaScript will display the selected book's information here. -->
+        <div id="bookDetails">
+            <p>Loading book details...</p>
+        </div>
+
+        <!-- Return to the search page. -->
+        <p>
+            <a href="index.html">Back to Book Search</a>
+        </p>
+    </main>
+
+    <!-- Load the script that retrieves book details from Open Library. -->
+    <script src="details.js"></script>
+</body>
+</html>

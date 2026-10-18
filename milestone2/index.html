@@ -1,0 +1,39 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Search - Open Library</title>
+    <!-- Milestone 2 has its own stylesheet. -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation shared across all three pages. -->
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="bookshelf.html">My Bookshelf</a>
+    </nav>
+
+    <main>
+        <h1>Open Library Book Search</h1>
+        <p>Search for books by title, author, or keyword.</p>
+
+        <!-- Search controls; we will connect the API next. -->
+        <form id="searchForm">
+            <input type="text" id="searchInput"
+                   placeholder="Enter a book or keyword">
+            <button type="submit">Search</button>
+        </form>
+
+        <!-- Live search results will appear here. -->
+        <div id="results"></div>
+
+        <!-- Page selection will go here. -->
+        <div id="pagination"></div>
+    </main>
+    <!-- Load the JavaScript that handles book searches. -->
+    <script src="search.js"></script>
+
+</body>
+</html>
