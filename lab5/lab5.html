@@ -1,0 +1,66 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab 5 - Open Library API</title>
+</head>
+<body>
+
+    <h1>Open Library: Data Analysis Books</h1>
+
+    <!-- Book results from the Open Library API appear here. -->
+    <div id="results">Loading books...</div>
+
+    <script>
+        // Lab 5: Request 10 books about data analysis.
+        // We will change the search term and limit in Part 3.
+        const apiURL =
+            "https://openlibrary.org/search.json?q=data%20analysis&limit=10";
+
+        // Fetch live book information from Open Library.
+        fetch(apiURL)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Unable to retrieve books.");
+                }
+                return response.json();
+            })
+            .then(data => {
+                const results = document.getElementById("results");
+
+                // Clear the loading message before displaying results.
+                results.innerHTML = "";
+
+                // Show a message if the API returns no books.
+                if (!data.docs || data.docs.length === 0) {
+                    results.textContent = "No books found.";
+                    return;
+                }
+
+                const bookList = document.createElement("ul");
+
+                // Loop through the docs array and display each book.
+                for (const book of data.docs) {
+                    const listItem = document.createElement("li");
+
+                    // Some books do not have a publication year.
+                    const year = book.first_publish_year ?? "Year unavailable";
+
+                    listItem.textContent = `${book.title} - ${year}`;
+                    bookList.appendChild(listItem);
+                }
+
+                results.appendChild(bookList);
+            })
+            .catch(error => {
+                // Display a helpful message if the API request fails.
+                document.getElementById("results").textContent =
+                    "Error loading books. Please try again.";
+                console.error(error);
+            });
+    </script>
+
+</body>
+</html>
