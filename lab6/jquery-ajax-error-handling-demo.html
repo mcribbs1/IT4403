@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<title>jQuery AJAX error demo</title>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+<script type="text/javascript">
+
+    $(document).ready(function ()
+    {
+        $("#button1").click(function ()
+        {
+            var val = $("#situations").val();
+            $("#responseStatus").html("Processing ... <img src='http://vignette1.wikia.nocookie.net/wikiality/images/7/70/ProgressBar.gif/revision/latest?cb=20070406024457'>");
+            $.ajaxSetup({ timeout: 10000 }); // set global timeout for ajax
+            $.getJSON("server-response.php?situation=" + val, function (jsoncontent, status, jqxhr)
+            {
+                $("#responseStatus").html(jsoncontent.FirstName + " " + jsoncontent.LastName);
+            })
+            .fail(function (jqxhr, status, errorMessage)
+            {
+                $("#responseStatus").html("Status Code: " + status+"<br>Error Message: "+errorMessage);
+            });
+        });
+		
+		// same effect but using the ajax method
+        $("#button2").click(function ()
+        {
+            var val = $("#situations").val();
+            $("#responseStatus").html("Processing ... <img src='http://vignette1.wikia.nocookie.net/wikiality/images/7/70/ProgressBar.gif/revision/latest?cb=20070406024457'>");
+            $.ajax("server-response.php?situation=" + val, { dataType: "json", timeout:6000 })
+            .done(function (jsoncontent)
+            {
+                $("#responseStatus").html(jsoncontent.FirstName + " " + jsoncontent.LastName);
+            })
+            .fail(function (jqxhr, status, errorMessage)
+            {
+                $("#responseStatus").html("Status Code: " + status+"<br>Error Message: "+errorMessage);
+            });
+        });
+
+    });
+
+</script>
+</head>
+
+<body>
+
+<h1>jQuery AJAX error handling</h1>
+    <p>The server side page can be viewed here (change the parameter situation number from 0 to 5 in the URL to view different response situations):</p>
+    <ul>
+        <li><a href="server-response.php?situation=0" target="_blank">server-response.php?situation=0</a></li>
+    </ul>
+    First, choose a simulated server response situation:
+    <select id="situations">
+        <option value="0">Successful instant response</option>
+        <option value="1">Successful response but delayed for 5 seconds</option>
+        <option value="2">Response fails with a timeout (30 seconds)</option>
+        <option value="3">Response fails (404 file not found)</option>
+        <option value="4">Response fails (500 server error)</option>
+        <option value="5">Response with invalid JSON</option>
+    </select>
+<input type="button" id="button1" value="Click me to use the .getJSON method" />
+<input type="button" id="button2" value="Click me to use the .ajax method" />
+
+<h3>Response Status</h3>
+<p id="responseStatus"></p>
+
+</body>
+</html>

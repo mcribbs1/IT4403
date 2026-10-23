@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<title>AJAJ</title>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+<script type="text/javascript">
+
+    $(document).ready(function ()
+    {
+        //getJSON method
+		$("#button1").click(function ()
+        {
+            $.getJSON("server-data-json.php", function (jsoncontent)
+            {
+                $("#Course").html("");
+                instructor = jsoncontent;
+                $("#Instructor").html(instructor.FirstName + " - " + instructor.Title);
+            });
+        });
+		
+		//get method, notice the difference of the last paramter of this method
+        $("#button2").click(function ()
+        {
+            $.get("server-data-json.php", function (instructor)
+            {
+                $("#Course").html("");
+                $("#Instructor").html(instructor.FirstName + " " + instructor.LastName + " : " + instructor.Title);
+            },
+            "json"); //notice we need to set the return data type otherwise the object is not contructed.
+        });
+		
+		//ajax methed, notice the how a parameter is passed with the request
+        $("#button3").click(function ()
+        {
+            $.ajax("server-data-json.php", { data: { withcourse: "true" }, dataType: "json" })
+            .done(function (jsoncontent)
+            {
+                instructor = jsoncontent;
+                $("#Instructor").html(instructor.FirstName + " - " + instructor.LastName);
+                $("#Course").html("");
+                $.each(instructor.Course, function (index, course)
+                {
+                    $("#Course").append(course.Title + " (" + course.Enrollment+ ") - ");
+                });
+
+            });
+        });
+
+    });
+
+</script>
+</head>
+
+<body>
+
+<h1>jQuery AJAX loading JSON using .getJSON(), .get(), .ajax()</h1>
+<p>This file demonstrates jQuery AJAX with JSON data, where button clicks request JSON from the server and display instructor and course information without reloading the page.
+
+It is different from the previous two files because those loaded HTML content, while this one loads JSON data and then uses JavaScript/jQuery to pick specific values and show them on the page.</p>
+    <p>The server side JSON can be viewed here:</p>
+    <ul>
+        <li><a href="server-data-json.php" target="_blank">server-data-json.php</a></li>
+        <li><a href="server-data-json.php?withcourse=true" target="_blank">server-data-json.php?withcourse=true</a></li>
+    </ul>
+<h3>The following three clickable items demonstrate three ways to trigger the click event and stay on the same page</h3>
+<input type="button" id="button1" value="Click me to load instructor JSON data" style="background-color:yellow" /> | 
+<a id="button2" href="#">Click me to load instructor JSON data</a> | 
+<span id="button3" style="cursor:pointer; text-decoration:underline">Click me to load instructor with course JSON data</span>
+
+<h3>Instructor Information</h3>
+	<p>Instructor: <span id="Instructor"></span></p>
+	<p>Teaching: <span id="Course"></span></p>
+<h3>Summary</h3>
+<p>.getJSON() → simplest simplest when the server returns JSON; automatically parses JSON i.e.when you know the response is JSON</p>
+<p>.get() → simple and short way to send a GET request for data.</p>
+<p>.ajax() → most flexible and most powerful, allows full control over (parameters, headers, data types, and options).</p>
+</p>
+</body>
+</html>

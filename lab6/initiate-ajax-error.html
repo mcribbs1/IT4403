@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>jQuery AJAX call errors</title>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        // Lab 6 Activity 2: Prevent the form button from
+        // submitting the form and refreshing the webpage.
+        $("#button1").click(function (event) {
+            event.preventDefault();
+
+            // Use the local HTML file to test AJAX without
+            // relying on the Google Books API.
+            $("#ajaxDiv1")
+                .load("ajax-static-response.html")
+                .hide()
+                .fadeIn("slow");
+        });
+
+        // Lab 6 Activity 2: Prevent the link from following
+        // its default href="#" behavior.
+        $("#button2").click(function (event) {
+            event.preventDefault();
+
+            // Load the same HTML content without refreshing
+            // the entire webpage.
+            $("#ajaxDiv1")
+                .load("ajax-static-response.html")
+                .hide()
+                .fadeIn("slow");
+        });
+
+    });
+</script>
+
+
+</head>
+<body>
+    <h1>Fix errors: Request some content from https://www.googleapis.com/books/v1/volumes?q=php%20mysql</h1>
+	<form>
+    <input type="button" id="button1" value="Click me to load some partial page content" />
+	</form>
+	
+	<a href="#" id="button2">Click me to load some content</a>
+	
+	<h2>Load content in AJAX way here</h2>
+
+    <div id="ajaxDiv1"></div>
+
+</body>
+</html>

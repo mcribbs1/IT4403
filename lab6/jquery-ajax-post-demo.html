@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<title>jQuery AJAX post</title>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+<script type="text/javascript">
+
+    $(document).ready(function ()
+    {
+        // the post method; 
+		$("#button1").click(function ()
+        {
+            $.post("http://jsonplaceholder.typicode.com/posts", 
+                {
+                    title: 'foo',
+                    body: 'bar',
+                    userId: 1
+                },
+                function (datareturned)
+                {
+                    $("#result").html("The new message is added with a server assigned ID of "+datareturned.id);
+                });
+        });
+		
+		//ajax method
+        $("#button2").click(function ()
+        {
+            $.ajax('http://jsonplaceholder.typicode.com/posts', 
+            {
+                method: 'POST',
+                data: 
+                {
+                    title: 'test me',
+                    body: 'another test message',
+                    userId: 2
+                }
+            })
+            .done(function (data2)
+            {
+                $("#result").html("The new message is added and its id is "+data2.id);
+            });
+        });
+
+    });
+
+</script>
+</head>
+
+<body>
+
+<h1>jQuery AJAX post using .post(), .ajax()</h1>
+    <p>The example submits some data to the service at <a href="http://jsonplaceholder.typicode.com" target="_blank">http://jsonplaceholder.typicode.com</a> using POST method. <br> Note that the service is for testing purpose only; it will correctly respond to the request but no actual message is inserted. It cannot return real new IDs because the API does not actually store data.
+    It only simulates a successful POST response. </p>
+    <p>Please note that.post() is a simple shortcut for sending a POST request with minimal setup and .ajax() is a general and flexible method that can send GET, POST, and other types of requests with more options.</p>
+    
+<input type="button" id="button1" value="Click me to add a message using .post" />
+<input type="button" id="button2" value="Click me to add a message using .ajax" />
+
+<h3>Result</h3>
+<p id="result"></p>
+
+</body>
+</html>

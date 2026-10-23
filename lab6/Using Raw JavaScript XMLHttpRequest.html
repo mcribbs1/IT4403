@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>Raw JavaScript AJAX</title>
+
+<script type="text/javascript">
+
+    // 1. simplest ajax call in default anonymous function
+    function UpdateDivAjax1() 
+	{
+        xmlHttp = new XMLHttpRequest(); // use the function below GetXmlHttpObject() if you want to deal with earlier version browsers.
+        xmlHttp.onreadystatechange = function () //default anonymous function
+		{
+            if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+                document.getElementById('ajaxDiv1').innerHTML = xmlHttp.responseText;
+        };
+        xmlHttp.open("GET", 'ajax-static-response.html', true);
+        xmlHttp.send();
+    }
+
+
+    // 2. use a callback function; compare UpdateDivAjax1() and UpdateDivAjax2() 
+    function UpdateDivAjax2() 
+    {
+        xmlHttp = new XMLHttpRequest();
+        xmlHttp.onreadystatechange = UpdateDivCallback; //points to a function instead of an anonymous function
+        xmlHttp.open("GET", 'ajax-dynamic-response.php?parameter=1000', true);        
+        xmlHttp.send();
+    }
+    // define a response (callback) handler function
+    function UpdateDivCallback()
+    {
+        if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+            document.getElementById('ajaxDiv2').innerHTML = xmlHttp.responseText;
+    }
+
+
+</script>
+
+</head>
+<body>
+    <h1>Raw JavaScript AJAX Demo: Loading Server Content Without Page Reload</h1>
+<p>This demo shows how raw JavaScript AJAX (XMLHttpRequest) can request static and dynamic content from the server and update specific sections of a webpage without reloading the entire page. It demonstrates loading a static HTML response and a dynamic PHP response with parameters. This code uses raw JavaScript (XMLHttpRequest), showing how AJAX works at a lower level without libraries.</p>    <h2>1. Use a simple Ajax call function: UpdateDivAjax1()</h2>
+    <input type="button" value="Click me to load some content from the server" 
+            onclick="UpdateDivAjax1()" /><br />
+    <div id="ajaxDiv1"></div>
+	
+	<h2>2. Use a better organized Ajax call function and call with a parameter: UpdateDivAjax2()</h2>
+    <input type="button" value="Click me to load some content from the server" 
+            onclick="UpdateDivAjax2()" /><br />
+    <div id="ajaxDiv2"></div>
+   
+</body>
+</html>

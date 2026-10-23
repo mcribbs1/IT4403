@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Passing Parameter in SPA</title>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+	<script type="text/javascript">
+	 $(document).ready(function ()
+	 {
+		 $("#btnSearch").click(function ()
+		 {
+			var url="https://openlibrary.org/search.json?q=" + encodeURIComponent($("#searchTerm").val());
+			searchBooks(url);
+		 });
+	 });
+
+    function searchBooks(servicePoint)
+    {
+        $("#booklist").html("Searching ..."+"<img src='http://vignette1.wikia.nocookie.net/wikiality/images/7/70/ProgressBar.gif/revision/latest?cb=20070406024457'>");
+
+        $.getJSON(servicePoint, function (json)
+        {
+            var booksHTML="";
+			for (i in json.docs)
+			{
+				if(json.docs[i].cover_i)
+				{
+					var coverURL="https://covers.openlibrary.org/b/id/"+json.docs[i].cover_i+"-S.jpg";
+					booksHTML+="<img class='booklistitem' data-bookid='"+json.docs[i].key+ "'";
+					booksHTML+=" src='"+coverURL+"' height='100'>";
+				}
+			}
+
+			$("#booklist").html(booksHTML);
+
+            $(".booklistitem").on('click', function () 
+			{ 	
+				getBookDetails($(this).attr("data-bookid"));
+			});
+
+        })
+		.fail(function (jqxhr, status, errorMessage)
+		{
+			$("#booklist").html("Status Code: " + status+"<br>Error Message: "+errorMessage);
+		});
+     }
+
+     function getBookDetails(bookid)
+     {
+         $("#bookdetails").html("Working ...");
+
+         $.getJSON("https://openlibrary.org"+bookid+".json", function (json)
+         {
+            $("#bookdetails").html("");
+
+			var bookHTML = "<h3>"+json.title+ "</h3>";
+
+			if(json.covers)
+			{
+				bookHTML+="<img src='https://covers.openlibrary.org/b/id/"+json.covers[0]+"-M.jpg'>";
+			}
+
+			if(json.description)
+			{
+				if(typeof json.description === "object")
+					bookHTML+="<p>"+json.description.value+"</p>";
+				else
+					bookHTML+="<p>"+json.description+"</p>";
+			}
+
+			bookHTML+="<a href='https://openlibrary.org"+bookid+".json' target='_blank'>See this book's JSON</a>";
+
+			$("#bookdetails").html(bookHTML);
+         });
+     }
+</script>
+
+<style>
+    .booklistitem
+	{
+		cursor: pointer;
+		margin:1px;
+	}
+</style>
+</head>
+
+<body>
+<div id="header">
+	<h1>Book search using Open Library Search API</h1>
+	<input type="text" id="searchTerm" value="web" />
+	<input type="button" id="btnSearch" value="Search" />
+</div>
+
+<div id="maincontent">
+	<div id="booklist"></div>
+	<div id="bookdetails" style="width: 50%; padding:10px"></div>
+</div>
+
+</body>
+</html>
