@@ -1,0 +1,68 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Open Library - Milestone 3</title>
+
+    <!-- Milestone 3 uses its own stylesheet. -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <main>
+        <h1>Open Library Book Explorer</h1>
+        <p>Search for books and explore our collection.</p>
+
+        <!-- Search for books without leaving this page. -->
+        <section id="searchSection">
+            <h2>Search Books</h2>
+
+            <form id="searchForm">
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Enter a book title or keyword"
+                >
+                <button type="submit" id="searchButton">
+                    Search
+                </button>
+            </form>
+
+            <!-- Show loading messages and search errors here. -->
+            <p id="searchMessage" role="status"></p>
+
+            <!-- Display book search results here. -->
+            <div id="results"></div>
+
+            <!-- Display pagination buttons here. -->
+            <div id="pagination"></div>
+        </section>
+
+        <!-- Show details when a user selects a book. -->
+        <section id="detailsSection">
+            <h2>Book Details</h2>
+            <div id="bookDetails">
+                <p>Select a book to view its details.</p>
+            </div>
+        </section>
+
+        <!-- Load a book collection from Open Library. -->
+        <section id="collectionSection">
+            <h2>Science Fiction Collection</h2>
+
+            <p id="collectionMessage" role="status"></p>
+
+            <div id="collectionResults"></div>
+        </section>
+    </main>
+
+    <!-- jQuery is required for Milestone 3 AJAX requests. -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <!-- Load the Milestone 3 single-page application. -->
+    <script src="app.js"></script>
+</body>
+</html>
