@@ -82,8 +82,14 @@ function handleSearch(event) {
         }
     });
 
-    searchRequest.always(function () {
-        $("#searchButton").prop("disabled", false);
+    // Only restore the Search button when the current request finishes.
+    const activeSearchRequest = searchRequest;
+
+    activeSearchRequest.always(function () {
+        if (searchRequest === activeSearchRequest) {
+            $("#searchButton").prop("disabled", false);
+            searchRequest = null;
+        }
     });
 }
 

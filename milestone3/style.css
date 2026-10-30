@@ -1,5 +1,6 @@
-/* Milestone 2 - Open Library */
-/* Shared styling for all three pages. */
+
+/* Milestone 3 - Open Library Single Page Application */
+/* Styling for the search, book details, and collection sections. */
 
 * {
     box-sizing: border-box;
@@ -12,7 +13,7 @@ body {
     color: #24352f;
 }
 
-/* Navigation links appear on every page. */
+/* Navigation links for the application. */
 nav {
     background-color: #204d3e;
     padding: 20px;
@@ -74,8 +75,10 @@ button:hover {
     background-color: #326c56;
 }
 
-/* Book results will be displayed as cards. */
-#results {
+/* Milestone 3: Use the same grid layout for search results
+   and the predefined science-fiction collection. */
+#results,
+#collectionResults {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     gap: 20px;
@@ -83,6 +86,7 @@ button:hover {
     text-align: center;
 }
 
+/* Style each book as a card. */
 .book-card {
     background-color: white;
     padding: 20px;
@@ -101,11 +105,10 @@ button:hover {
     font-weight: bold;
 }
 
-/* Pagination controls will appear below the results. */
+/* Pagination controls appear below the search results. */
 #pagination {
     margin-top: 30px;
 }
-
 
 /* Milestone 3: Give expanded book details their own full row. */
 #detailsSection {
