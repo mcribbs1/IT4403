@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Open Library - Milestone 4</title>
+
+    <!-- Milestone 4 stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <main>
+        <!-- Website heading -->
+        <header class="page-header">
+            <h1>Open Library Book Explorer</h1>
+            <p>Search for books and explore our collection.</p>
+        </header>
+
+        <!-- Search bar -->
+        <section id="searchSection">
+            <h2>Search Books</h2>
+
+            <form id="searchForm">
+                <input type="text" id="searchInput" placeholder="Enter a book title or keyword"
+                    aria-label="Search books">
+                <button type="submit" id="searchButton">
+                    Search
+                </button>
+            </form>
+        </section>
+
+        <!-- Tabs for switching between sections -->
+        <nav class="tab-navigation" aria-label="Book sections">
+            <button type="button" id="searchTab" class="tab-button active" aria-controls="searchPanel"
+                aria-pressed="true">
+                Search Results
+            </button>
+
+            <button type="button" id="collectionTab" class="tab-button" aria-controls="collectionSection"
+                aria-pressed="false">
+                Public Bookshelf
+            </button>
+        </nav>
+
+        <!-- Results on the left and details on the right -->
+        <div class="content-layout">
+
+            <div class="left-panel">
+
+                <!-- Grid and list view buttons -->
+                <div class="view-controls">
+                    <h2>Browse Books</h2>
+
+                    <div class="view-buttons">
+                        <button type="button" id="gridViewButton" class="view-button active" aria-pressed="true">
+                            Grid View
+                        </button>
+
+                        <button type="button" id="listViewButton" class="view-button" aria-pressed="false">
+                            List View
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Search results -->
+                <section id="searchPanel">
+                    <p id="searchMessage" role="status"></p>
+
+                    <div id="results" class="book-grid"></div>
+
+                    <!-- Search pagination -->
+                    <div id="pagination"></div>
+                </section>
+
+                <!-- Separate public collection -->
+                <section id="collectionSection" hidden>
+                    <h2>Science Fiction Collection</h2>
+
+                    <p id="collectionMessage" role="status"></p>
+
+                    <div id="collectionResults" class="book-grid">
+                    </div>
+                </section>
+            </div>
+
+            <!-- Book details stay on the same page -->
+            <section id="detailsSection" class="right-panel">
+                <h2>Book Details</h2>
+
+                <div id="bookDetails">
+                    <p>Select a book to view its details.</p>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Mustache template for book cards -->
+    <script id="bookCardTemplate" type="x-tmpl-mustache">
+        <article class="book-card">
+            {{#hasCover}}
+                <img
+                    src="{{coverUrl}}"
+                    alt="Cover of {{title}}"
+                    loading="lazy">
+            {{/hasCover}}
+
+            {{^hasCover}}
+                <p class="no-cover">No cover available.</p>
+            {{/hasCover}}
+
+            <div class="book-card-info">
+                <h3>{{title}}</h3>
+                <p class="book-author">{{authorText}}</p>
+
+                <button
+                    type="button"
+                    class="details-button"
+                    data-work-id="{{workID}}"
+                    data-authors="{{authorsEncoded}}"
+                    {{^hasWorkID}}disabled{{/hasWorkID}}>
+                    View Details
+                </button>
+            </div>
+        </article>
+    </script>
+
+    <!-- Mustache template for individual book details -->
+    <script id="bookDetailsTemplate" type="x-tmpl-mustache">
+        <div class="details-content">
+
+            {{#hasCover}}
+                <img
+                    src="{{coverUrl}}"
+                    alt="Cover of {{title}}">
+            {{/hasCover}}
+
+            {{^hasCover}}
+                <p>No cover available.</p>
+            {{/hasCover}}
+
+            <h3>{{title}}</h3>
+
+            <p><strong>Authors:</strong> {{authorText}}</p>
+
+            <p><strong>Work ID:</strong> {{workID}}</p>
+
+            
+            <!-- Show a short description with an option to expand it. -->
+            <div class="book-description">
+                <strong>Description:</strong>
+
+                <p id="descriptionText" class="description-collapsed">
+                    {{description}}
+                </p>
+
+                {{#hasLongDescription}}
+                    <button type="button" id="toggleDescription">
+                        Show More
+                    </button>
+                {{/hasLongDescription}}
+            </div>
+
+
+            <p><strong>Subjects:</strong> {{subjects}}</p>
+
+            <a
+                href="{{openLibraryUrl}}"
+                target="_blank"
+                rel="noopener noreferrer">
+                View on Open Library
+            </a>
+        </div>
+    </script>
+
+    <!-- Separate Mustache template for collection books -->
+    <script id="collectionCardTemplate" type="x-tmpl-mustache">
+        <article class="book-card collection-card">
+
+            {{#hasCover}}
+                <img
+                    src="{{coverUrl}}"
+                    alt="Cover of {{title}}"
+                    loading="lazy">
+            {{/hasCover}}
+
+            {{^hasCover}}
+                <p class="no-cover">No cover available.</p>
+            {{/hasCover}}
+
+            <div class="book-card-info">
+                <h3>{{title}}</h3>
+                <p class="book-author">{{authorText}}</p>
+
+                <button
+                    type="button"
+                    class="details-button"
+                    data-work-id="{{workID}}"
+                    data-authors="{{authorsEncoded}}"
+                    {{^hasWorkID}}disabled{{/hasWorkID}}>
+                    View Details
+                </button>
+            </div>
+        </article>
+    </script>
+
+    <!-- Required libraries -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://unpkg.com/mustache@4.2.0/mustache.min.js"></script>
+
+    <!-- Application JavaScript -->
+    <script src="app.js"></script>
+</body>
+
+</html>
