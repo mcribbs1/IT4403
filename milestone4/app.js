@@ -71,9 +71,23 @@ $(document).ready(function () {
         $(this).text(isCollapsed ? "Show More" : "Show Less");
     });
 
+
     // Load the public collection.
     loadCollection();
 });
+
+// Show a fallback message if a book cover fails to load.
+    function handleCoverErrors() {
+        $(".book-card img, #bookDetails img").each(function () {
+            $(this).on("error", function () {
+                $(this).replaceWith(
+                    $("<p>")
+                        .addClass("no-cover")
+                        .text("No cover available.")
+                );
+            });
+        });
+    }
 
 // Change the active tab without losing results.
 function switchTab(tab) {
@@ -243,6 +257,7 @@ function displaySearchResults() {
     }).join("");
 
     $("#results").html(html);
+    handleCoverErrors();
 
     displayPagination();
 }
@@ -386,9 +401,14 @@ function displayBookDetails(book, workID, authors) {
         ? book.subjects.slice(0, 10)
         : [];
 
+    // Get the first publication year if available.
+    const firstPublished = book.first_publish_date
+        || "Not available";
+
     const details = {
         title: book.title || "Untitled book",
         workID: workID,
+        firstPublished: firstPublished,
         hasCover: Boolean(coverID),
         coverUrl: coverID
             ? `https://covers.openlibrary.org/b/id/${coverID}-M.jpg`
@@ -410,6 +430,8 @@ function displayBookDetails(book, workID, authors) {
     $("#bookDetails").html(
         Mustache.render(template, details)
     );
+
+    handleCoverErrors();
 }
 
 // Load the public science fiction collection.
@@ -448,6 +470,8 @@ function loadCollection() {
         }).join("");
 
         $("#collectionResults").html(html);
+
+        handleCoverErrors();
     })
     .fail(function () {
         $("#collectionMessage").text(
